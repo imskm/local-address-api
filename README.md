@@ -24,7 +24,8 @@ $towns = $address->towns();
 use LocalAddressApi\AddressApi;
 
 $town_id = 100;
-$address = new AddressApi($host, $port, $db_name, $username, $password, $pincode);
+// Notice $pincode is not given as last argument
+$address = new AddressApi($host, $port, $db_name, $username, $password);
 $town = $address->town($town_id);
 ```
 
