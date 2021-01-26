@@ -88,7 +88,7 @@ class Town
 
 	private function fetchStateFromDB($state_id)
 	{
-		$tabel = AddressTablesInfo::STATE_TABLE;
+		$table = AddressTablesInfo::STATE_TABLE;
 		$sql = "SELECT * FROM {$table} WHERE id = :id";
 		$st = $this->pdo->prepare($sql);
 		$st->bindValue(":id", $state_id, PDO::PARAM_INT);
