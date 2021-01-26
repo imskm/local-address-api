@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use LocalAddressApi\Town;
+use LocalAddressApi\State;
 use LocalAddressApi\District;
 use LocalAddressApi\AddressApi;
 use PHPUnit\Framework\TestCase;
@@ -130,6 +131,30 @@ class AddressApiTest extends TestCase
 
 		$address = new AddressApi($this->host, $this->port, $this->db_name, $username, $password);
 		$this->assertNull($town = $address->town($town_id));
+	}
+
+	public function test_success_district_can_be_fetched_from_loaded_town()
+	{
+		$username = getenv("address_db_username");
+		$password = getenv("address_db_password");
+		$pincode  = "743126";
+		$town_id  = "1";
+
+		$address = new AddressApi($this->host, $this->port, $this->db_name, $username, $password);
+		$town = $address->town($town_id);
+		$this->assertInstanceOf(District::class, $district = $town->district());
+	}
+
+	public function test_success_state_can_be_fetched_from_loaded_town()
+	{
+		$username = getenv("address_db_username");
+		$password = getenv("address_db_password");
+		$pincode  = "743126";
+		$town_id  = "1";
+
+		$address = new AddressApi($this->host, $this->port, $this->db_name, $username, $password);
+		$town = $address->town($town_id);
+		$this->assertInstanceOf(State::class, $state = $town->state());
 	}
 
 }
